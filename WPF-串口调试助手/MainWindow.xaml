@@ -1,0 +1,76 @@
+﻿<Window x:Class="WPF_串口调试助手.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:WPF_串口调试助手"
+        mc:Ignorable="d"
+        Title="串口调试助手——HL" Height="568" Width="1010" Icon="Icon.ico" Loaded="Window_Loaded">
+
+    <Grid Background="#FFF5E4FF">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="250"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="0" BorderBrush="#673AB7" BorderThickness="0 0 1 1"/>
+        <Border Grid.Column="1" Grid.Row="0" BorderBrush="#673AB7" BorderThickness="0 0 0 1"/>
+        <Border Grid.Column="0" Grid.Row="1" BorderBrush="#673AB7" BorderThickness="0 0 1 0"/>
+
+        <!--右侧设置界面-->
+        <Grid Grid.Column="1" Grid.Row="0" Background="White" Margin="0 0 0 1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="74.76"/>
+            </Grid.RowDefinitions>
+            
+            <Button x:Name="Search" Height="40" Width="150" Grid.Row="0" Click="Search_Click" FontSize="30" VerticalAlignment="Center" 
+                    materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                    materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                    materialDesign:ButtonProgressAssist.Value="-1"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Style="{StaticResource MaterialDesignOutlinedButton}" >
+                <TextBlock Text="串口检测" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+ 
+            <Label Content="串口号" Grid.Row="1" FontSize="20" Margin="20 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="Protname" Height="30" Width="130" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0"/>
+
+            <Label Content="波特率" Grid.Row="2" FontSize="20" Margin="20 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="Baudrate" Height="30" Width="130" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0"/>
+
+            <Label Content="数据位" Grid.Row="3" FontSize="20" Margin="20 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="Databit" Height="30" Width="130" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0"/>
+
+            <Label Content="校验位" Grid.Row="4" FontSize="20" Margin="20 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="Parity" Height="30" Width="130" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0"/>
+
+            <Label Content="停止位" Grid.Row="5" FontSize="20" Margin="20 0 0 0" VerticalAlignment="Center" FontWeight="Bold"/>
+            <ComboBox x:Name="Stopbit" Height="30" Width="130" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 0"/>
+
+            <Button x:Name="Open" Height="50" Width="200" Grid.Row="6" Click="Open_Click" FontSize="30" >
+                <TextBlock Text="开启串口" VerticalAlignment="Center"/>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="1" Background="White">
+            <Button x:Name="Send" Click="Send_Click" Height="100" Width="200" FontSize="30">
+                <TextBlock Text="发送" VerticalAlignment="Center"/>
+            </Button>
+        </Grid>
+        
+        <!--左侧接收和发送显示界面-->
+        <TextBox x:Name="Revdata" Grid.Column="0" Grid.Row="0" Margin="10" Foreground="#00E676" Background="Black"/>
+        <TextBox x:Name="Senddata" Grid.Column="0" Grid.Row="1" Margin="10" Background="White" Foreground="#673AB7"  FontWeight="Bold"/>
+    </Grid>
+</Window>
